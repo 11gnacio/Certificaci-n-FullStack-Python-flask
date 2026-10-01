@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="row">
+	<div class="col-md-3">
+		<div class="border border-dark bg-secondary bg-opacity-10 d-flex align-items-center justify-content-center" style="height: 320px; width: 100%;">
+			<span class="display-1 text-secondary">🖼️</span>
+		</div>
+	</div>
+
+	<div class="col-md-9">
+		<h1 class="display-4 fw-bold mb-3">{{ libro.titulo }}</h1>
+		<p class="fs-5 mb-1"><strong>Autor:</strong> {{ libro.autor }}</p>
+		<p class="fs-5 mb-1"><strong>Género:</strong> {{ libro.genero }}</p>
+		<p class="fs-5 mb-1"><strong>Publicado por:</strong> {{ libro.creador_nombre }}</p>
+		<p class="fs-5 mb-3"><strong>Fecha:</strong> {{ libro.fecha_publicacion }}</p>
+
+		{% if not es_favorito %}
+			<div class="my-3">
+				<a href="/favoritos/agregar/{{ libro.id }}" class="btn btn-outline-dark btn-lg fw-semibold">
+					❤ Agregar a Favoritos
+				</a>
+			</div>
+		{% endif %}
+
+		<p class="fs-5 text-secondary mt-3">
+			<strong>Descripción:</strong> {{ libro.descripcion }}
+		</p>
+	</div>
+</div>
+
+<hr class="border border-dark border-1 my-5">
+
+<div class="mb-4">
+	<h3 class="fw-bold mb-4">
+		Usuarios que agregaron este libro a favoritos ({{ usuarios_fav|length }})
+	</h3>
+	<ul class="list-unstyled ms-2">
+		{% for u in usuarios_fav %}
+			<li class="fs-5 mb-3 d-flex align-items-center">
+				<span class="fs-4 me-3">👤</span>
+				<span class="fw-semibold">{{ u.nombre }} {{ u.apellido }}</span>
+			</li>
+		{% endfor %}
+	</ul>
+</div>
+
+<div class="mt-4 mb-5">
+	<a href="/libros" class="text-primary fs-5 text-decoration-underline">← Volver a Mis Libros</a>
+</div>
+{% endblock %}

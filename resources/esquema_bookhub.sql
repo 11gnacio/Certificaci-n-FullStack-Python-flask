@@ -1,0 +1,40 @@
+CREATE DATABASE IF NOT EXISTS esquema_bookhub 
+CHARACTER SET utf8mb4 
+COLLATE utf8mb4_unicode_ci;
+
+USE esquema_bookhub;
+
+-- Tabla de Usuarios
+CREATE TABLE IF NOT EXISTS usuarios (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(100) NOT NULL,
+	apellido VARCHAR(100) NOT NULL,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	password VARCHAR(255) NOT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Tabla de Libros
+CREATE TABLE IF NOT EXISTS libros (
+	id INT AUTO_INCREMENT PRIMARY KEY,
+	titulo VARCHAR(255) NOT NULL,
+	autor VARCHAR(255) NOT NULL,
+	genero VARCHAR(100) NOT NULL,
+	fecha_publicacion DATE NOT NULL,
+	descripcion TEXT NOT NULL,
+	usuario_id INT NOT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
+);
+
+-- Tabla Intermedia para Favoritos (Muchos a Muchos)
+CREATE TABLE IF NOT EXISTS favoritos (
+	usuario_id INT NOT NULL,
+	libro_id INT NOT NULL,
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (usuario_id, libro_id),
+	FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+	FOREIGN KEY (libro_id) REFERENCES libros(id) ON DELETE CASCADE
+);

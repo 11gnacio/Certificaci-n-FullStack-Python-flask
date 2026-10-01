@@ -1,0 +1,24 @@
+# Archivos de entorno y credenciales
+.env
+
+# Archivos de virtualenv (Pipenv y Venv)
+.venv/
+venv/
+env/
+ENV/
+.venv
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Configuración de editores / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de sistema operativo
+.DS_Store
+Thumbs.db

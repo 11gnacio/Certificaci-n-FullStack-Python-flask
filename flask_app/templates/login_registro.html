@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<div class="text-center my-4">
+    <div class="d-flex justify-content-center align-items-center mb-1">
+        <span class="display-3 me-2">📖</span>
+        <h1 class="display-3 fw-bold m-0">BookHub</h1>
+    </div>
+    <p class="fs-4 text-secondary">Comparte, descubre y comenta libros</p>
+</div>
+
+<div class="row justify-content-center mt-4">
+    <!-- Crear Cuenta -->
+    <div class="col-md-5 pe-md-5 border-end border-2 border-dark">
+        <h2 class="fw-bold mb-4">Crear Cuenta</h2>
+
+        {% with messages = get_flashed_messages(category_filter=["registro"]) %}
+        {% if messages %}
+        <div class="alert alert-danger p-2">
+            {% for msg in messages %}<p class="m-0 small">{{ msg }}</p>{% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="/registro" method="POST">
+            <div class="row mb-3 align-items-center">
+                <label class="col-sm-4 col-form-label fw-bold">Nombre</label>
+                <div class="col-sm-8"><input type="text" name="nombre" class="form-control border-dark" required></div>
+            </div>
+            <div class="row mb-3 align-items-center">
+                <label class="col-sm-4 col-form-label fw-bold">Apellido</label>
+                <div class="col-sm-8"><input type="text" name="apellido" class="form-control border-dark" required>
+                </div>
+            </div>
+            <div class="row mb-3 align-items-center">
+                <label class="col-sm-4 col-form-label fw-bold">E-mail</label>
+                <div class="col-sm-8"><input type="email" name="email" class="form-control border-dark" required></div>
+            </div>
+            <div class="row mb-3 align-items-center">
+                <label class="col-sm-4 col-form-label fw-bold">Contraseña</label>
+                <div class="col-sm-8"><input type="password" name="password" class="form-control border-dark" required>
+                </div>
+            </div>
+            <div class="row mb-4 align-items-center">
+                <label class="col-sm-4 col-form-label fw-bold">Confirmar Contraseña</label>
+                <div class="col-sm-8"><input type="password" name="confirm_password" class="form-control border-dark"
+                        required></div>
+            </div>
+
+            <button type="submit" class="btn btn-dark btn-lg w-100 mb-2">Registrarse</button>
+            <div class="text-center">
+                <a href="#" class="text-primary text-decoration-none">¿Ya tienes cuenta? Inicia sesión</a>
+            </div>
+        </form>
+    </div>
+
+    <!-- Iniciar Sesión -->
+    <div class="col-md-5 ps-md-5 mt-4 mt-md-0">
+        <h2 class="fw-bold mb-4">Iniciar Sesión</h2>
+
+        {% with messages = get_flashed_messages(category_filter=["login"]) %}
+        {% if messages %}
+        <div class="alert alert-danger p-2">
+            {% for msg in messages %}<p class="m-0 small">{{ msg }}</p>{% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form action="/login" method="POST">
+            <div class="row mb-3 align-items-center">
+                <label class="col-sm-4 col-form-label fw-bold">E-mail</label>
+                <div class="col-sm-8"><input type="email" name="email" class="form-control border-dark" required></div>
+            </div>
+            <div class="row mb-4 align-items-center">
+                <label class="col-sm-4 col-form-label fw-bold">Contraseña</label>
+                <div class="col-sm-8"><input type="password" name="password" class="form-control border-dark" required>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-dark btn-lg w-100 mb-2">Iniciar Sesión</button>
+            <div class="text-center">
+                <a href="#" class="text-primary text-decoration-none">¿No tienes cuenta? Registrate</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
